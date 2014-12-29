@@ -1,0 +1,15 @@
+[Unit]
+Description=Jenkins
+After=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill myjenkins
+ExecStartPre=-/usr/bin/docker rm myjenkins
+ExecStartPre=/usr/bin/docker pull jenkins
+ExecStart=/usr/bin/docker run --name myjenkins -p 8081:8080 -v /home/core/data/jenkins_home:/var/jenkins_home jenkins
+ExecStop=/usr/bin/docker stop myjenkins
+
+[Install]
+WantedBy=multi-user.target
+
