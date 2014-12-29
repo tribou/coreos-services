@@ -1,0 +1,14 @@
+[Unit]
+Description=DNS Bind
+After=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill bind
+ExecStartPre=-/usr/bin/docker rm bind
+ExecStartPre=/usr/bin/docker pull sameersbn/bind
+ExecStart=/usr/bin/docker run --name bind -p 53:53/udp -p 10000:10000 -v /home/core/data/bind:/data sameersbn/bind
+ExecStop=/usr/bin/docker stop bind
+
+[Install]
+WantedBy=multi-user.target
