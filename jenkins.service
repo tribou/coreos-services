@@ -9,7 +9,7 @@ ExecStartPre=-/usr/bin/docker rm myjenkins
 ExecStartPre=/usr/bin/docker pull jenkins
 ExecStart=/usr/bin/docker run --name myjenkins -p 8081:8080 -v /home/core/data/jenkins_home:/var/jenkins_home jenkins
 ExecStop=/usr/bin/docker stop myjenkins
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
-
