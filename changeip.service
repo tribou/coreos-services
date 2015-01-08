@@ -1,0 +1,11 @@
+[Unit]
+Description=ChangeIP Updater
+After=docker.service
+
+[Service]
+Type=simple
+TimeoutStartSec=0
+ExecStart=/usr/bin/docker run --rm -it changeip-updater /bin/bash update-script.sh
+
+[Install]
+WantedBy=changeip.timer
