@@ -1,3 +1,12 @@
+# Install on systemctl:
+# sudo systemctl enable `pwd`/swapon.service
+# sudo systemctl start swapon.service
+#
+# After install optimization:
+# sudo sysctl vm.swappiness=10
+# sudo sysctl vm.vfs_cache_pressure=50
+# printf "vm.swappiness=10\nvm.vfs_cache_pressure=50\n" >> /etc/sysctl.d/99-sysctl.conf
+
 [Unit]
 Description=Turn on swap
  
