@@ -5,7 +5,12 @@ After=docker.service
 [Service]
 Type=simple
 TimeoutStartSec=0
-ExecStart=/usr/bin/docker run --rm -it changeip-updater /bin/bash update-script.sh
+EnvironmentFile=-/etc/sysconfig/changeip
+ExecStartPre=-/usr/bin/docker kill changeip
+ExecStartPre=-/usr/bin/docker rm changeip
+ExecStartPre=/usr/bin/docker pull tribou/changeip-updater
+ExecStart=/usr/bin/docker run --name changeip -e CHANGEIP_USERNAME=${CHANGEIP_USERNAME} -e CHANGEIP_PASSWORD=${CHANGEIP_PASSWORD} -e CHANGEIP_RECORD=${CHANGEIP_RECORD} tribou/changeip-updater
 
 [Install]
 WantedBy=changeip.timer
+
