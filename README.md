@@ -8,7 +8,7 @@ On the host:
 
 ```bash
 git clone https://github.com/tribou/coreos-services.git
-cd coreos-services
+cd coreos-services/unclustered
 sudo systemctl enable `pwd`/bind.service
 sudo systemctl start bind.service
 ```
